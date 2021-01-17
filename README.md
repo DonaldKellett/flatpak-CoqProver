@@ -36,7 +36,7 @@ Make sure to re-build after making any changes to the manifest file (or `run.sh`
 
 ## Known Issues
 
-- 17/01/2021: For some reason, when attempting to build `lablgtk3-gtksourceview3` using `dune build -p lablgtk3-gtksourceview3`, `dune` complains that it doesn't know about the package and the build fails. When `lablgtk3-gtksourceview3` is removed from the Manifest file, everything builds successfully (at the time of writing) and the Flatpak is created.
+- 17/01/2021: For some reason, even when ZArith has been built and installed, the command `ocamlfind query zarith -format %v` reports that it is not installed (when running Coq's `configure` script)
 
 ## License
 
