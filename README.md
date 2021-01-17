@@ -2,6 +2,42 @@
 
 Manifest and associated files for building a working Coq environment for Flatpak (WIP)
 
+## Setting up your environment for building the Flatpak
+
+1. [Setup Flatpak for your distro](https://flatpak.org/setup/)
+1. Install `flatpak-builder` from your distro's repositories
+1. `flatpak remote-add --user --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo`
+1. `flatpak install --user flathub org.freedesktop.Sdk//20.08`
+1. `flatpak install --user flathub org.freedesktop.Platform//20.08`
+
+## Building the Flatpak
+
+First set up your environment (see the section above). Then:
+
+1. `cd` to the root of this repo
+1. `flatpak-builder --user --force-clean --install coq-build org.flatpak.CoqProver.yml`
+
+## Testing the Flatpak
+
+Build it first (see the section above). Then do:
+
+```bash
+$ flatpak run org.flatpak.CoqProver <COMMAND> <ARGS...>
+```
+
+to run the specified `<COMMAND>` with the given command line `<ARGS...>` inside the application. For example:
+
+```bash
+$ flatpak run org.flatpak.CoqProver ocaml --version  # Checks the OCaml version inside the app
+$ flatpak run org.flatpak.CoqProver ls /             # Lists all subdirectories under the root directory in the app environment
+```
+
+Make sure to re-build after making any changes to the manifest file (or `run.sh`) before testing the Flatpak.
+
+## Known Issues
+
+- 17/01/2021: For some reason, when attempting to build `lablgtk3-gtksourceview3` using `dune build -p lablgtk3-gtksourceview3`, `dune` complains that it doesn't know about the package and the build fails. When `lablgtk3-gtksourceview3` is removed from the Manifest file, everything builds successfully (at the time of writing) and the Flatpak is created.
+
 ## License
 
 Haven't figured this out yet, but feel free to clone this repo and try to build the Flatpak yourself from the given files.
