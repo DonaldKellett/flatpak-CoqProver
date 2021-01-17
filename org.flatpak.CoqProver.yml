@@ -1,0 +1,64 @@
+app-id: org.flatpak.CoqProver
+runtime: org.freedesktop.Platform
+runtime-version: '20.08'
+sdk: org.freedesktop.Sdk
+command: run.sh
+modules:
+  - name: ocaml
+    buildsystem: simple
+    build-commands:
+      - ./configure -prefix /app -cc "gcc -fcommon"
+      - make world.opt
+      - make install
+      - make clean
+    sources:
+      - type: archive
+        url: https://github.com/ocaml/ocaml/archive/4.05.0.tar.gz
+        sha256: e5d8a6f629020c580473d8afcfcb06c3966d01929f7b734f41dc0c737cd8ea3f
+  - name: zarith
+    buildsystem: simple
+    build-commands:
+      - ./configure
+      - make
+      - make tests
+      - make install
+    sources:
+      - type: archive
+        url: https://github.com/ocaml/Zarith/archive/release-1.10.tar.gz
+        sha256: 0b7eb0a6c65a5401eef9c15e5ea6794b8aef36b0a3c718187c3ccd2a36a0b9e3
+  - name: findlib
+    buildsystem: simple
+    build-commands:
+      - ./configure
+      - make all
+      - make opt
+      - make install
+      - make clean
+    sources:
+      - type: archive
+        url: https://github.com/ocaml/ocamlfind/archive/findlib-1.8.0.tar.gz
+        sha256: c8655fcd53ad8462f37c4080af90f04984f09797a714fd2cb4128bc7428eaba2
+  - name: dune
+    buildsystem: simple
+    build-commands:
+      - make release
+      - make install
+    sources:
+      - type: archive
+        url: https://github.com/ocaml/dune/archive/1.8.0.tar.gz
+        sha256: ddcb5b9bd4a2d835918c78f72957b1475f174cf74f41753a40ca8dc2b1252946
+  - name: lablgtk3-gtksourceview3
+    buildsystem: simple
+    build-commands:
+      - dune build -p lablgtk3-gtksourceview3
+    sources:
+      - type: archive
+        url: https://github.com/garrigue/lablgtk/archive/3.1.0.tar.gz
+        sha256: f9a6628a14e0dcedda5fabf949cbf2dfefb1af2c27174853b63aff84d17d5db0
+  - name: run
+    buildsystem: simple
+    build-commands:
+      - install -D run.sh /app/bin/run.sh
+    sources:
+      - type: file
+        path: run.sh
