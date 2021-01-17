@@ -36,7 +36,7 @@ Make sure to re-build after making any changes to the manifest file (or `run.sh`
 
 ## Known Issues
 
-- 17/01/2021: For some reason, even when ZArith has been built and installed, the command `ocamlfind query zarith -format %v` reports that it is not installed (when running Coq's `configure` script) and the build fails as a result
+- 17/01/2021: ~~For some reason, even when ZArith has been built and installed, the command `ocamlfind query zarith -format %v` reports that it is not installed (when running Coq's `configure` script) and the build fails as a result~~ EOF on "Where should I install the Coq binaries?" preventing build
 
 ## License
 
