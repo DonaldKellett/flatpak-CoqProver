@@ -18,11 +18,12 @@ modules:
   - name: findlib
     buildsystem: simple
     build-commands:
-      - ./configure -bindir /app/bin
+      - ./configure
       - make all
       - make opt
       - make install
       - make clean
+      - ocamlfind list
     sources:
       - type: archive
         url: https://github.com/ocaml/ocamlfind/archive/findlib-1.8.0.tar.gz
@@ -32,10 +33,11 @@ modules:
       - /lib/ocaml/ld.conf
     buildsystem: simple
     build-commands:
-      - ./configure -installdir /app/bin
+      - ./configure
       - make
       - make tests
       - make install
+      - ocamlfind list
     sources:
       - type: archive
         url: https://github.com/ocaml/Zarith/archive/release-1.10.tar.gz
@@ -43,7 +45,7 @@ modules:
   - name: coq
     buildsystem: simple
     build-commands:
-      - ./configure -prefix /app
+      - ./configure
       - make
       - make install
     sources:
