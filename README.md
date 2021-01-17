@@ -4,7 +4,7 @@ Manifest and associated files for building a working Coq environment for Flatpak
 
 ## Setting up your environment for building the Flatpak
 
-1. [Setup Flatpak for your distro](https://flatpak.org/setup/)
+1. [Set up Flatpak for your distro](https://flatpak.org/setup/)
 1. Install `flatpak-builder` from your distro's repositories
 1. `flatpak remote-add --user --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo`
 1. `flatpak install --user flathub org.freedesktop.Sdk//20.08`
