@@ -15,21 +15,10 @@ modules:
       - type: archive
         url: https://github.com/ocaml/ocaml/archive/4.05.0.tar.gz
         sha256: e5d8a6f629020c580473d8afcfcb06c3966d01929f7b734f41dc0c737cd8ea3f
-  - name: zarith
-    buildsystem: simple
-    build-commands:
-      - ./configure
-      - make
-      - make tests
-      - make install
-    sources:
-      - type: archive
-        url: https://github.com/ocaml/Zarith/archive/release-1.10.tar.gz
-        sha256: 0b7eb0a6c65a5401eef9c15e5ea6794b8aef36b0a3c718187c3ccd2a36a0b9e3
   - name: findlib
     buildsystem: simple
     build-commands:
-      - ./configure
+      - ./configure -bindir /app/bin
       - make all
       - make opt
       - make install
@@ -38,23 +27,29 @@ modules:
       - type: archive
         url: https://github.com/ocaml/ocamlfind/archive/findlib-1.8.0.tar.gz
         sha256: c8655fcd53ad8462f37c4080af90f04984f09797a714fd2cb4128bc7428eaba2
-  - name: dune
+  - name: zarith
+    ensure-writable:
+      - /lib/ocaml/ld.conf
     buildsystem: simple
     build-commands:
-      - make release
+      - ./configure -installdir /app/bin
+      - make
+      - make tests
       - make install
     sources:
       - type: archive
-        url: https://github.com/ocaml/dune/archive/1.8.0.tar.gz
-        sha256: ddcb5b9bd4a2d835918c78f72957b1475f174cf74f41753a40ca8dc2b1252946
-  - name: lablgtk3-gtksourceview3
+        url: https://github.com/ocaml/Zarith/archive/release-1.10.tar.gz
+        sha256: 0b7eb0a6c65a5401eef9c15e5ea6794b8aef36b0a3c718187c3ccd2a36a0b9e3
+  - name: coq
     buildsystem: simple
     build-commands:
-      - dune build -p lablgtk3-gtksourceview3
+      - ./configure -prefix /app
+      - make
+      - make install
     sources:
       - type: archive
-        url: https://github.com/garrigue/lablgtk/archive/3.1.0.tar.gz
-        sha256: f9a6628a14e0dcedda5fabf949cbf2dfefb1af2c27174853b63aff84d17d5db0
+        url: https://github.com/coq/coq/archive/V8.13.0.tar.gz
+        sha256: 06445dbd6cb3c8a2e4e957dbd12e094d609a62fcb0c8c3cad0cd1fdedda25c9b
   - name: run
     buildsystem: simple
     build-commands:
