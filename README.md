@@ -1,8 +1,25 @@
+_This repo is looking for a new maintainer, please scroll down to "Contributing" if interested._
+
 # flatpak-CoqProver
 
-Manifest and associated files for building a working Coq environment for Flatpak (WIP)
+Manifest and associated files for building a working Coq environment for Flatpak (dormant, looking for a new maintainer)
+
+## Installing and using the Flatpak
+
+**Please scroll down to section "Known Issues" and understand the security implications before following the installation instructions!**
+
+1. [Set up Flatpak for your distro](https://flatpak.org/setup/), even if it is already pre-installed on your system
+1. Download the Flatpak bundle: `coq-8.13.0-2.flatpak`
+1. Open the bundle in Software Center and click Install, or run `flatpak install coq-8.13.0-2.flatpak` in a terminal
+1. Run `flatpak run org.flatpak.CoqProver` in a terminal. This performs initial setup so `coqc` and `coq_makefile` can be invoked normally afterwards
+
+Note that there is currently no CoqIDE nor external libraries included in the bundle so its use is currently limited.
+
+If you do not intend to further develop the Flatpak, you may skip all subsequent sections (setting up, building, initializing, testing).
 
 ## Setting up your environment for building the Flatpak
+
+This (and subsequent sections) is for those interested in further developing the Flatpak. Users may safely ignore these sections.
 
 1. [Set up Flatpak for your distro](https://flatpak.org/setup/)
 1. Install `flatpak-builder` from your distro's repositories
@@ -37,10 +54,6 @@ Make sure to remove the changes introduced by `org.flatpak.CoqProver` in your ba
 
 - 18/01/2021: While the Flatpak bundle "works", it does so in a manner that negates all sandboxing benefits provided by Flatpak, introduces a security risk by prepending to the user's PATH variable and possibly overriding various binaries previously owned by the user. It also fails to clean up after itself upon uninstallation, leaving the bashrc permanently modified and its binaries permanently installed.
 
-## License
+## Contributing
 
-Haven't figured this out yet, but feel free to clone this repo and try to build the Flatpak yourself from the given files.
-
-If you want to work on this with me, feel free to open an issue ticket in the issue tracker requesting to be a collaborator and I will give you edit rights to this repository.
-
-A proper license will be added once this project is in usable shape and the Coq development team has been consulted w.r.t. legal matters.
+This project is currently archived as the original author is no longer interested in developing it, but if you would like to take this further and figure out whether Coq (with CoqIDE and external libraries) can be bundled with Flatpak in a sane manner, please drop me an email directly at donaldsebleung@gmail.com and I will happily transfer repo ownership to you.
