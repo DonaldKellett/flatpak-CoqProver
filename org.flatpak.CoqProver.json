@@ -1,0 +1,40 @@
+{
+  "app-id": "org.flatpak.CoqProver",
+  "runtime": "org.freedesktop.Platform",
+  "runtime-version": "20.08",
+  "sdk": "org.freedesktop.Sdk",
+  "command": "run.sh",
+  "build-options": {
+    "build-args": [
+      "--share=network"
+    ]
+  },
+  "modules": [
+    {
+      "name": "build",
+      "buildsystem": "simple",
+      "build-commands": [
+        "./build.sh"
+      ],
+      "sources": [
+        {
+          "type": "file",
+          "path": "build.sh"
+        }
+      ]
+    },
+    {
+      "name": "run",
+      "buildsystem": "simple",
+      "build-commands": [
+        "install -D run.sh /app/bin/run.sh"
+      ],
+      "sources": [
+        {
+          "type": "file",
+          "path": "run.sh"
+        }
+      ]
+    }
+  ]
+}
