@@ -24,6 +24,19 @@
       ]
     },
     {
+      "name": "bashrc-append",
+      "buildsystem": "simple",
+      "build-commands": [
+        "install -D bashrc-append /app/bashrc-append"
+      ],
+      "sources": [
+        {
+          "type": "file",
+          "path": "bashrc-append"
+        }
+      ]
+    },
+    {
       "name": "run",
       "buildsystem": "simple",
       "build-commands": [
@@ -36,5 +49,8 @@
         }
       ]
     }
+  ],
+  "finish-args": [
+    "--filesystem=home"
   ]
 }

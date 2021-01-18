@@ -15,28 +15,27 @@ Manifest and associated files for building a working Coq environment for Flatpak
 First set up your environment (see the section above). Then:
 
 1. `cd` to the root of this repo
-1. `flatpak-builder --user --force-clean --install coq-build org.flatpak.CoqProver.yml`
+1. `flatpak-builder --user --force-clean --install coq-build org.flatpak.CoqProver.json`
+
+## Initializing the Flatpak
+
+Build it first (see the section above). Then, before you do anything else, do:
+
+```bash
+$ flatpak run org.flatpak.CoqProver
+```
+
+This copies the app binaries and libraries over to a location under your home directory included in the PATH so you can invoke `coqc` and `coq_makefile` as usual.
 
 ## Testing the Flatpak
 
-Build it first (see the section above). Then do:
+Initialize it first (see the section above). Then try invoking `coqc` and `coq_makefile` as usual. If all is well, they should work as expected.
 
-```bash
-$ flatpak run org.flatpak.CoqProver <COMMAND> <ARGS...>
-```
-
-to run the specified `<COMMAND>` with the given command line `<ARGS...>` inside the application. For example:
-
-```bash
-$ flatpak run org.flatpak.CoqProver ocaml --version  # Checks the OCaml version inside the app
-$ flatpak run org.flatpak.CoqProver ls /             # Lists all subdirectories under the root directory in the app environment
-```
-
-Make sure to re-build after making any changes to the manifest file (or `run.sh`) before testing the Flatpak.
+Make sure to remove the changes introduced by `org.flatpak.CoqProver` in your bashrc, re-build and re-initialize after making any changes to the manifest file (or `run.sh`) before testing the Flatpak.
 
 ## Known Issues
 
-N/A
+- 18/01/2021: While the Flatpak bundle "works", it does so in a manner that negates all sandboxing benefits provided by Flatpak, introduces a security risk by prepending to the user's PATH variable and possibly overriding various binaries previously owned by the user. It also fails to clean up after itself upon uninstallation, leaving the bashrc permanently modified and its binaries permanently installed.
 
 ## License
 
